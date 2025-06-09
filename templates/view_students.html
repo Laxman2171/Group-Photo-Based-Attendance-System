@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Students</title>
+    <style>
+        /* General body styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f7fc;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        /* Container for the content */
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+            text-align: center;
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        /* Styling for the student list */
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        ul li {
+            font-size: 18px;
+            color: #555;
+            background-color: #f9f9f9;
+            margin-bottom: 12px;
+            padding: 12px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s ease, background-color 0.3s ease;
+        }
+
+        ul li:hover {
+            background-color: #e0f7fa;
+            transform: translateY(-5px);
+        }
+
+        /* Styling for the "Enroll a new student" link */
+        a {
+            color: #4CAF50;
+            font-size: 16px;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            background-color: #f1f1f1;
+            display: inline-block;
+            margin-top: 20px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        a:hover {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+                width: 90%;
+            }
+
+            h2 {
+                font-size: 24px;
+            }
+
+            ul li {
+                font-size: 16px;
+                padding: 10px;
+            }
+
+            a {
+                font-size: 14px;
+                padding: 8px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>List of Students</h2>
+
+        {% if students %}
+            <ul>
+                {% for student in students %}
+                    <li>{{ student.username }}</li> <!-- Adjust based on your model attributes -->
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No students enrolled.</p>
+        {% endif %}
+
+        <br>
+        <a href="{{ url_for('enroll_student') }}">Enroll a new student</a>
+    </div>
+
+</body>
+</html>

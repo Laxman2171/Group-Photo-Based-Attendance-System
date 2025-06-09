@@ -1,0 +1,82 @@
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Dashboard</title>
+</head>
+<body>
+    <h2>Student Dashboard</h2>
+    <ul>
+        <li><a href="{{ url_for('enroll_photos') }}">Enroll Photos</a></li>
+        <li><a href="{{ url_for('view_attendance') }}">View Attendance</a></li>
+    </ul>
+    <a href="{{ url_for('logout') }}">Logout</a>
+</body>
+</html>
+
+
+<!-- upload group photo -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Upload Group Photo</title>
+</head>
+<body>
+    <h2>Upload Group Photo for Attendance</h2>
+    <form action="{{ url_for('upload_group_photo') }}" method="post" enctype="multipart/form-data">
+        <label for="group_photo">Select Group Photo:</label>
+        <input type="file" name="group_photo" accept="image/*" required><br><br>
+        <button type="submit">Upload and Mark Attendance</button>
+    </form>
+
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul>
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+</body>
+</html>
+<!-- upload photos -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Enroll Photos</title>
+</head>
+<body>
+    <h2>Enroll with Multiple Photos</h2>
+    <form method="post" enctype="multipart/form-data">
+        <label>Student Name:</label>
+        <input type="text" name="name" required><br>
+        <label>Upload Photos:</label>
+        <input type="file" name="photos" multiple required><br>
+        <button type="submit">Enroll</button>
+    </form>
+</body>
+</html>
+
+<!-- enrolled students -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enrolled Students</title>
+</head>
+<body>
+    <h2>List of Enrolled Students</h2>
+    <ul>
+        {% for name in student_names %}
+            <li>{{ name }}</li>
+        {% endfor %}
+    </ul>
+    <a href="{{ url_for('index') }}">Back to Home</a>
+</body>
+</html>
+

@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        /* General body styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f7f7;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Main container (Only right section) */
+        .box-form {
+            width: 100%;
+            height: 100%;
+            max-width: 600px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        /* Right section (Login Form) */
+        .right {
+            background-color: white;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 30px;
+            box-sizing: border-box;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .right h5 {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .right p {
+            font-size: 14px;
+            color: #555;
+        }
+
+        .inputs {
+            width: 100%;
+            margin-bottom: 15px;
+        }
+
+        .inputs input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            background-color: #f7f7f7;
+            transition: border-color 0.3s ease-in-out;
+        }
+
+        .inputs input:focus {
+            border-color: #4CAF50;
+            outline: none;
+        }
+
+        .remember-me--forget-password {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+
+        .remember-me--forget-password .text-checkbox {
+            font-size: 14px;
+            color: #777;
+        }
+
+        .remember-me--forget-password p a {
+            font-size: 14px;
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .remember-me--forget-password p a:hover {
+            text-decoration: underline;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 14px 20px;
+            font-size: 16px;
+            border-radius: 8px;
+            width: 100%;
+            cursor: pointer;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .flash-messages {
+            margin: 15px 0;
+            padding: 10px;
+            background-color: #f8d7da;
+            color: #721c24;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .box-form {
+                flex-direction: column;
+            }
+
+            .right h5 {
+                font-size: 20px;
+            }
+
+            .inputs input,
+            button {
+                font-size: 14px;
+                padding: 10px;
+            }
+
+            .remember-me--forget-password {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .remember-me--forget-password .text-checkbox,
+            .remember-me--forget-password p {
+                font-size: 12px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .right h5 {
+                font-size: 18px;
+            }
+
+            .inputs input,
+            button {
+                font-size: 14px;
+                padding: 12px;
+            }
+
+            .remember-me--forget-password {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="box-form">
+        <!-- Right Section (Login Form) -->
+        <div class="right">
+            <h5>Login</h5>
+
+            <!-- Flash messages for errors or success -->
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            <div class="flash-messages">
+                <ul>
+                    {% for message in messages %}
+                    <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+            {% endwith %}
+
+            <p>Don't have an account? <a href="{{ url_for('register') }}">Create Your Account</a></p>
+            <form method="POST" action="{{ url_for('login') }}">
+                <div class="inputs">
+                    <input type="text" id="username" name="username" placeholder="User Name" required>
+                    <input type="password" id="password" name="password" placeholder="Password" required>
+                </div>
+
+                <div class="remember-me--forget-password">
+                    <label>
+                        <input type="checkbox" name="item" checked/>
+                        <span class="text-checkbox">Remember me</span>
+                    </label>
+                    <p><a href="#">Forgot Password?</a></p>
+                </div>
+
+                <button type="submit">Login</button>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
